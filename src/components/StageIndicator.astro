@@ -1,0 +1,72 @@
+---
+import type { ProjectStage } from '../data/projects';
+import { stages, stageLabels } from '../data/projects';
+
+interface Props {
+  stage: ProjectStage;
+}
+
+const { stage } = Astro.props;
+const currentIndex = stages.indexOf(stage);
+---
+
+<div class="stage-bar">
+  {stages.map((s, i) => (
+    <div class="stage-bar__step" title={stageLabels[s]}>
+      <div
+        class:list={[
+          'stage-bar__dot',
+          { 'stage-bar__dot--past': i < currentIndex },
+          { 'stage-bar__dot--current': i === currentIndex },
+          { 'stage-bar__dot--future': i > currentIndex },
+        ]}
+        style={i === currentIndex ? `background: var(--stage-${s});` : undefined}
+      />
+      {i === currentIndex && (
+        <span class="stage-bar__label">{stageLabels[s]}</span>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .stage-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+  }
+
+  .stage-bar__step {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .stage-bar__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .stage-bar__dot--past {
+    background: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .stage-bar__dot--current {
+    width: 8px;
+    height: 8px;
+  }
+
+  .stage-bar__dot--future {
+    border: 1px solid var(--color-grid-line);
+    background: transparent;
+  }
+
+  .stage-bar__label {
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+</style>

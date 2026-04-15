@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import GridOverlay from '../components/GridOverlay.astro';
+import Hero from '../components/Hero.astro';
+import Ethos from '../components/Ethos.astro';
+import ProjectGrid from '../components/ProjectGrid.svelte';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/projects';
+---
+
+<Base>
+  <GridOverlay />
+
+  <main>
+    <Hero />
+
+    <section class="section reveal" id="thesis">
+      <div class="thesis-grid">
+        <div class="thesis-item">
+          <span class="thesis-coord text-xs text-muted">A7</span>
+          <p class="text-lg">Ideas become products. Products become companies.</p>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-coord text-xs text-muted">B7</span>
+          <p class="text-lg">Early turns of the flywheel matter most.</p>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-coord text-xs text-muted">C7</span>
+          <p class="text-lg">Shared effort. Shared risk. Shared reward.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="section__header">Portfolio</div>
+      <ProjectGrid projects={projects} client:visible />
+    </section>
+
+    <Ethos />
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .thesis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-21);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .thesis-item {
+    position: relative;
+    padding: var(--sp-21);
+    border: 1px solid var(--color-grid-line);
+    background: var(--color-bg-elevated);
+  }
+
+  .thesis-item p {
+    color: var(--color-text);
+    font-weight: 300;
+  }
+
+  .thesis-coord {
+    position: absolute;
+    top: var(--sp-5);
+    right: var(--sp-5);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 768px) {
+    .thesis-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

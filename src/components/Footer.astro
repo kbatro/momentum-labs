@@ -1,0 +1,92 @@
+---
+import RegistrationMark from './RegistrationMark.astro';
+---
+
+<footer class="footer">
+  <div class="footer__divider"></div>
+
+  <div class="footer__content">
+    <RegistrationMark position="bottom-left" size={16} />
+    <RegistrationMark position="bottom-right" size={16} />
+
+    <nav class="footer__links">
+      <a href="https://gpdg.us" target="_blank" rel="noopener noreferrer">GPDG</a>
+      <span class="footer__sep">/</span>
+      <a href="https://kaseybatterman.com" target="_blank" rel="noopener noreferrer">Kasey Batterman</a>
+      <span class="footer__sep">/</span>
+      <a href="https://thecyberfoundation.org" target="_blank" rel="noopener noreferrer">The Cyber Foundation</a>
+    </nav>
+
+    <p class="footer__copy">Momentum Labs MMXXVI</p>
+
+    <div class="footer__annotation">
+      <span>END.TRANSMISSION</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    z-index: 1;
+    padding: 0 clamp(var(--sp-13), 5vw, var(--sp-89));
+    padding-bottom: var(--sp-34);
+  }
+
+  .footer__divider {
+    height: 1px;
+    background: var(--color-orange);
+    margin-bottom: var(--sp-34);
+    opacity: 0.6;
+  }
+
+  .footer__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-13);
+  }
+
+  .footer__links {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-8);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer__links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer__links a:hover {
+    color: var(--color-orange);
+    text-decoration: none;
+  }
+
+  .footer__sep {
+    font-size: 0.6rem;
+    color: var(--color-grid-line);
+  }
+
+  .footer__copy {
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-reg-mark);
+  }
+
+  .footer__annotation {
+    font-size: 0.45rem;
+    letter-spacing: 0.3em;
+    color: var(--color-reg-mark);
+    opacity: 0.5;
+    margin-top: var(--sp-5);
+  }
+</style>

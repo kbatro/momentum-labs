@@ -1,0 +1,77 @@
+---
+import RegistrationMark from './RegistrationMark.astro';
+---
+
+<div class="grid-overlay" aria-hidden="true">
+  {Array.from({ length: 11 }).map((_, i) => (
+    <div class="grid-overlay__line" />
+  ))}
+
+  <RegistrationMark position="top-left" />
+  <RegistrationMark position="top-right" />
+  <RegistrationMark position="bottom-left" />
+  <RegistrationMark position="bottom-right" />
+
+  <!-- Scattered coordinate labels -->
+  <span class="grid-coord" style="top: 15%; left: 8.33%;">A2</span>
+  <span class="grid-coord" style="top: 35%; left: 25%;">C4</span>
+  <span class="grid-coord" style="top: 55%; left: 58.33%;">G7</span>
+  <span class="grid-coord" style="top: 75%; left: 83.33%;">J10</span>
+  <span class="grid-coord" style="top: 90%; left: 41.67%;">E11</span>
+
+  <!-- Signal pulse (one animated line) -->
+  <div class="grid-signal"></div>
+</div>
+
+<style>
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .grid-overlay__line {
+    border-right: 1px solid var(--color-grid-line);
+    height: 100%;
+  }
+
+  /* Horizontal lines via background */
+  .grid-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(100vh / 12 - 1px),
+      var(--color-grid-line) calc(100vh / 12 - 1px),
+      var(--color-grid-line) calc(100vh / 12)
+    );
+    pointer-events: none;
+  }
+
+  .grid-coord {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    letter-spacing: 0.2em;
+    color: var(--color-reg-mark);
+    opacity: 0.6;
+  }
+
+  .grid-signal {
+    position: absolute;
+    left: 25%;
+    top: 0;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--color-orange-dim), transparent);
+    opacity: 0;
+    animation: signal-pulse 8s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+</style>

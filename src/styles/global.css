@@ -1,0 +1,128 @@
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Design Tokens ── */
+:root {
+  /* Color — oklch for precision */
+  --color-bg:          oklch(0.13 0.005 250);
+  --color-bg-elevated: oklch(0.16 0.005 250);
+  --color-surface:     oklch(0.20 0.005 250);
+  --color-orange:      oklch(0.65 0.27 35);
+  --color-orange-dim:  oklch(0.45 0.15 35);
+  --color-orange-glow: oklch(0.65 0.27 35 / 0.15);
+  --color-text:        oklch(0.92 0.005 250);
+  --color-text-muted:  oklch(0.50 0.01 250);
+  --color-grid-line:   oklch(0.22 0.005 250);
+  --color-reg-mark:    oklch(0.30 0.01 250);
+
+  /* Stage colors */
+  --stage-idea:        oklch(0.55 0.10 280);
+  --stage-research:    oklch(0.55 0.10 230);
+  --stage-prototype:   oklch(0.60 0.15 80);
+  --stage-active:      oklch(0.65 0.27 35);
+  --stage-established: oklch(0.60 0.15 145);
+
+  /* Grid */
+  --grid-columns: 12;
+  --grid-gap: 1px;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Fibonacci spacing scale */
+  --sp-1: 2px;
+  --sp-2: 3px;
+  --sp-3: 5px;
+  --sp-5: 8px;
+  --sp-8: 13px;
+  --sp-13: 21px;
+  --sp-21: 34px;
+  --sp-34: 55px;
+  --sp-55: 89px;
+  --sp-89: 144px;
+}
+
+/* ── Utility ── */
+a {
+  color: var(--color-orange);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: var(--color-bg);
+}
+
+/* ── Scroll progress bar ── */
+@property --scroll-pct {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-orange) calc(var(--scroll-pct) * 100%),
+    transparent calc(var(--scroll-pct) * 100%)
+  );
+  z-index: 1000;
+  animation: scroll-progress linear;
+  animation-timeline: scroll();
+}
+
+@keyframes scroll-progress {
+  to { --scroll-pct: 1; }
+}
+
+/* ── Section base ── */
+.section {
+  position: relative;
+  padding: var(--sp-55) clamp(var(--sp-13), 5vw, var(--sp-89));
+}
+
+.section__header {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-34);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+.section__header::before {
+  content: '//';
+  color: var(--color-orange);
+}

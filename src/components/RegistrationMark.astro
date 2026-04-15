@@ -1,0 +1,38 @@
+---
+interface Props {
+  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  size?: number;
+}
+
+const { position, size = 24 } = Astro.props;
+
+const positionStyles: Record<string, string> = {
+  'top-left': 'top: 8px; left: 8px;',
+  'top-right': 'top: 8px; right: 8px;',
+  'bottom-left': 'bottom: 8px; left: 8px;',
+  'bottom-right': 'bottom: 8px; right: 8px;',
+};
+---
+
+<div class="reg-mark" style={`position: absolute; ${positionStyles[position]}`}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Crosshair -->
+    <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="0.5" />
+    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="0.5" />
+    <!-- Circle -->
+    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="0.5" />
+    <!-- Corner brackets -->
+    <path d="M2 6 L2 2 L6 2" stroke="currentColor" stroke-width="0.75" fill="none" />
+    <path d="M18 2 L22 2 L22 6" stroke="currentColor" stroke-width="0.75" fill="none" />
+    <path d="M22 18 L22 22 L18 22" stroke="currentColor" stroke-width="0.75" fill="none" />
+    <path d="M6 22 L2 22 L2 18" stroke="currentColor" stroke-width="0.75" fill="none" />
+  </svg>
+</div>
+
+<style>
+  .reg-mark {
+    color: var(--color-reg-mark);
+    pointer-events: none;
+    z-index: 2;
+  }
+</style>

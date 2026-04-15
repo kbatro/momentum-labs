@@ -1,0 +1,162 @@
+---
+import RegistrationMark from './RegistrationMark.astro';
+import FlywheelDiagram from './FlywheelDiagram.svelte';
+---
+
+<section class="section ethos reveal" id="ethos">
+  <div class="section__header">Philosophy</div>
+
+  <div class="ethos__layout">
+    <div class="ethos__text">
+      <div class="ethos__block">
+        <span class="ethos__coord">D23</span>
+        <blockquote class="ethos__quote">
+          "The value comes from showing up and doing the work to make something real."
+        </blockquote>
+      </div>
+
+      <div class="ethos__block">
+        <span class="ethos__coord">E24</span>
+        <blockquote class="ethos__quote">
+          "We are starting with trust, effort, and a shared commitment. That is intentional."
+        </blockquote>
+      </div>
+
+      <div class="ethos__principles">
+        <div class="principle-card reveal">
+          <RegistrationMark position="top-left" size={16} />
+          <span class="principle-coord">P.01</span>
+          <p>Shared effort, shared risk, shared reward.</p>
+        </div>
+        <div class="principle-card reveal">
+          <RegistrationMark position="top-left" size={16} />
+          <span class="principle-coord">P.02</span>
+          <p>Vulnerability, trust, passion, respect.</p>
+        </div>
+        <div class="principle-card reveal">
+          <RegistrationMark position="top-left" size={16} />
+          <span class="principle-coord">P.03</span>
+          <p>The harder path is usually the one worth taking.</p>
+        </div>
+        <div class="principle-card reveal">
+          <RegistrationMark position="top-left" size={16} />
+          <span class="principle-coord">P.04</span>
+          <p>We hold the principles above the product.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ethos__flywheel">
+      <FlywheelDiagram client:visible />
+      <p class="flywheel-caption">
+        Small flywheels. Fast turns.<br />
+        <span class="text-muted">The early turns are everything.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="ethos__footer">
+    <p class="text-sm text-muted">
+      Built on the <a href="https://gpdg.us" target="_blank" rel="noopener noreferrer">Good People Doing Good</a> ethos.
+    </p>
+  </div>
+</section>
+
+<style>
+  .ethos__layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--sp-55);
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .ethos__block {
+    position: relative;
+    margin-bottom: var(--sp-34);
+  }
+
+  .ethos__coord {
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--color-reg-mark);
+    display: block;
+    margin-bottom: var(--sp-5);
+  }
+
+  .ethos__quote {
+    font-size: 1.125rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text);
+    padding-left: var(--sp-13);
+    border-left: 2px solid var(--color-orange);
+  }
+
+  .ethos__principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-8);
+  }
+
+  .principle-card {
+    position: relative;
+    padding: var(--sp-21);
+    border: 1px solid var(--color-grid-line);
+    background: var(--color-bg-elevated);
+  }
+
+  .principle-coord {
+    display: block;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--color-orange-dim);
+    margin-bottom: var(--sp-8);
+  }
+
+  .principle-card p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .ethos__flywheel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: var(--sp-55);
+  }
+
+  .flywheel-caption {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: var(--sp-13);
+  }
+
+  .ethos__footer {
+    margin-top: var(--sp-55);
+    padding-top: var(--sp-21);
+    border-top: 1px solid var(--color-grid-line);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .ethos__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .ethos__principles {
+      grid-template-columns: 1fr;
+    }
+
+    .ethos__flywheel {
+      position: static;
+    }
+  }
+</style>
