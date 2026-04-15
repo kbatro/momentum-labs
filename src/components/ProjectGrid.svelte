@@ -32,30 +32,31 @@
   onMount(() => {
     if (!gridEl) return;
 
-    // Staggered entrance via GSAP if available
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
+    async function init() {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
 
-        const tiles = gridEl!.querySelectorAll('.tile-wrapper');
-        gsap.fromTo(
-          tiles,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.06,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: gridEl,
-              start: 'top 80%',
-              once: true,
-            },
-          }
-        );
-      });
-    });
+      const tiles = gridEl!.querySelectorAll('.tile-wrapper');
+      gsap.fromTo(
+        tiles,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.06,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: gridEl,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      );
+    }
+
+    init();
   });
 </script>
 

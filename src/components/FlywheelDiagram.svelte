@@ -13,26 +13,28 @@
   onMount(() => {
     if (!svgEl) return;
 
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
+    async function init() {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
 
-        const wheel = svgEl!.querySelector('.flywheel-group');
-        if (!wheel) return;
+      const wheel = svgEl!.querySelector('.flywheel-group');
+      if (!wheel) return;
 
-        gsap.to(wheel, {
-          rotation: 360,
-          transformOrigin: '50% 50%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: svgEl,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            scrub: 1,
-          },
-        });
+      gsap.to(wheel, {
+        rotation: 360,
+        transformOrigin: '50% 50%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: svgEl,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 1,
+        },
       });
-    });
+    }
+
+    init();
   });
 </script>
 
