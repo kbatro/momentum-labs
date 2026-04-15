@@ -66,7 +66,7 @@
   <!-- Labels (static, outside the rotating group) -->
   <div class="flywheel-labels">
     {#each segments as seg}
-      <span class="flywheel-label" style="--angle: {seg.angle}deg;">
+      <span class="flywheel-label">
         {seg.label}
       </span>
     {/each}
